@@ -1,0 +1,95 @@
+### endpoint for adding a new employee
+POST http://localhost:3000/employees
+Content-Type: application/json
+
+{
+  "first_name": "John",
+  "last_name": "Doe",
+  "email": "john.doe@example.com",
+  "hire_date": "2024-04-01"
+}
+
+### endpoint to create a job posting
+POST http://localhost:3000/job_postings
+Content-Type: application/json
+
+{
+  "title": "Software Engineer",
+  "description": "We are seeking a skilled software engineer to join our team and contribute to the development of cutting-edge software applications.",
+  "location": "New York, NY"
+}
+
+### endpoint to update a job posting 
+PUT http://localhost:3000/job-postings/2
+Content-Type: application/json
+
+{
+  "title": "devops Engineer",
+  "description": "We are seeking a skilled devops engineer to join our team and contribute to the development of cutting-edge software applications.",
+  "location": "Nigeria,Abouja"
+}
+
+### endpoint to delete a job posting
+DELETE http://localhost:3000/job_postings/2
+
+### endpoint for Creating a New Applicant
+POST http://localhost:3000/applicants
+Content-Type: application/json
+
+ {
+ "first_name": "John", 
+ "last_name": "Doe", 
+ "email": "kennedymarvellous001Q@gmail.com", 
+ "phone": "123-456-7890", 
+ "resume": "Resume content here"
+ }
+
+
+### endpoint for Create a new application
+POST http://localhost:3000/applications
+Content-Type: application/json
+
+{
+ "applicant_id": 1,
+ "job_posting_id": 1,
+ "application_date": "2021-02-16",
+ "status": "hired"
+}
+
+### endpoint for schelduling interviews
+POST http://localhost:3000/interviews
+Content-Type: application/json
+
+{
+  "application_id": 2,
+  "date": "2023-04-15",
+  "time": "10:00:00"
+}
+
+### endpoint for tracking candidate status
+GET http://localhost:3000/applications/2
+Content-Type: application/json
+
+### endpoint for managing onboarding documents
+POST http://localhost:3000/onboarding_documents
+Content-Type: application/json
+
+{
+ "employee_id": 1,
+ "documentName": "Resume",
+ "documentUrl": "http://example.com/resume.pdf"
+}
+
+### endpoint for Scheduling  Orientation Session
+POST http://localhost:3000/orientation_sessions
+Content-Type: application/json
+
+{
+  "employee_id":1, 
+  "date":"2024-04-18",
+  "location":"abuja,nigeria"
+}
+
+###  endpoint for tracking unboarding progress
+GET http://localhost:3000/onboarding-progress/1
+Content-Type: application/json
