@@ -16,7 +16,7 @@ const con = mysql.createConnection({
 app.post('/employees', bodyParser.json(), function (req, res) {
   const { first_name, last_name, email, hire_date } = req.body;
   const query = 'INSERT INTO employees (first_name, last_name, email, hire_date) VALUES (?, ?, ?, ?)';
-  con.query(query, [first_name, last_name, email, hire_date], (err, result) => {
+  con.query(query, [first_name, last_name, email, hire_date], function (err, result) {
     if (err) throw err;
     res.send(result);
   });
@@ -25,7 +25,7 @@ app.post('/employees', bodyParser.json(), function (req, res) {
 app.post("/job_postings", bodyParser.json(), function (req, res) {
   const { title, description, location } = req.body;
   const query = `INSERT INTO job_postings (title, description, location) VALUES (?, ?, ?)`;
-  con.query(query, [title, description, location], (err, result) => {
+  con.query(query, [title, description, location], function (err, result) {
     if (err) throw err;
     res.send(result);
   });
@@ -77,10 +77,10 @@ app.post('/interviews', bodyParser.json(), function (req, res) {
   });
 });
 //creating an endpoint for tracking candidate status
-app.get("/applications/:id", (req, res) => {
+app.get("/applications/:id", bodyParser.json(), function (req, res) {
   const id = req.params.id;
   const sql = `SELECT * FROM applications WHERE id = ?`;
-  con.query(sql, [id], (err, result) => {
+  con.query(sql, [id], function (err, result) {
     if (err) throw err;
     res.send(result);
   })
@@ -89,7 +89,7 @@ app.get("/applications/:id", (req, res) => {
 app.post('/onboarding_documents', bodyParser.json(), function (req, res) {
   const { employee_id, documentName, documentUrl } = req.body;
   const query = `INSERT INTO onboarding_documents (employee_id, document_name, document_url) VALUES (?, ?, ?)`;
-  con.query(query, [employee_id, documentName, documentUrl], (err, result) => {
+  con.query(query, [employee_id, documentName, documentUrl], function (err, result) {
     if (err) throw err;
     res.send(result);
   });
@@ -98,20 +98,29 @@ app.post('/onboarding_documents', bodyParser.json(), function (req, res) {
 app.post('/orientation_sessions', bodyParser.json(), function (req, res) {
   const { employee_id, date, location } = req.body;
   const query = `INSERT INTO orientation_sessions (employee_id, date, location) VALUES (?, ?, ?)`;
-  con.query(query, [employee_id, date, location], (err, result) => {
+  con.query(query, [employee_id, date, location], function (err, result) {
     if (err) throw err;
     res.send(result);
   });
 });
 //creating an endpoint for tracking unboarding progress
-app.get('/onboarding-progress/:employee_id',bodyParser.json(), function (req, res) {
+app.get('/onboarding-progress/:employee_id', bodyParser.json(), function (req, res) {
   const employee_id = req.params.employee_id
   const query = 'SELECT * FROM onboarding_documents WHERE employee_id = ?';
-  con.query(query, [employee_id], (err, result) => {
+  con.query(query, [employee_id], function (err, result) {
     if (err) throw err;
     res.send(result);
   });
 });
+// creating an endpoint for offering jobs
+app.post("/job_offers", bodyParser.json(), function (req, res) {
+  const { job_title, offer_date, start_date, salary, additional_info } = req.body
+  const sql = `INSERT INTO job_offers (job_title, offer_date, start_date, salary, additional_info) VALUES (?,?,?,?,?)`;
+  con.query(sql, [job_title, offer_date, start_date, salary, additional_info], function (err, result) {
+    if (err) throw err;
+    res.send(result)
+  });
+})
 app.listen(3000),
   console.log("server is running at port 3000")
 

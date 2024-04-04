@@ -3,10 +3,10 @@ POST http://localhost:3000/employees
 Content-Type: application/json
 
 {
-  "first_name": "John",
+  "first_name": "kennedy",
   "last_name": "Doe",
-  "email": "john.doe@example.com",
-  "hire_date": "2024-04-01"
+  "email": "john.kennedy@example.com",
+  "hire_date": "2024-05-01"
 }
 
 ### endpoint to create a job posting
@@ -93,3 +93,15 @@ Content-Type: application/json
 ###  endpoint for tracking unboarding progress
 GET http://localhost:3000/onboarding-progress/1
 Content-Type: application/json
+
+###
+POST http://localhost:3000/job_offers
+Content-Type: application/json
+
+{
+  "job_title":"software enginerring",
+  "offer_date":"2023-04-15",
+  "start_date":"2023-05-01",
+  "salary":80000.00,
+  "additional_info":"full-time position"
+}
